@@ -3,5 +3,31 @@
     "dotenv": "^16.4.2",
     "express": "^4.18.2",
     "uuid": "^9.0.1"
-  }
+  },
+  "name": "ecommerce-server-side",
+  "version": "1.0.0",
+  "description": "Ecommerce server side using sessions and cookies to keep user logged in or out",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm start",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevesdiary/Ecommerce-backend-with-node.git"
+  },
+  "keywords": [
+    "session",
+    "node",
+    "server",
+    "cookies",
+    "ecommerce"
+  ],
+  "author": "Stephen Oyeyemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevesdiary/Ecommerce-backend-with-node/issues"
+  },
+  "homepage": "https://github.com/stevesdiary/Ecommerce-backend-with-node#readme"
 }
