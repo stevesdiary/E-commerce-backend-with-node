@@ -6,7 +6,7 @@
   },
   "name": "ecommerce-server-side",
   "version": "1.0.0",
-  "description": "Ecommerce server side using sessions and cookies to keep user logged in or out",
+  "description": "E-commerce server side using sessions and cookies to keep user logged in or out",
   "main": "app.js",
   "devDependencies": {},
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevesdiary/Ecommerce-backend-with-node.git"
+    "url": "git+https://github.com/stevesdiary/E-commerce-backend-with-node.git"
   },
   "keywords": [
     "session",
@@ -27,7 +27,7 @@
   "author": "Stephen Oyeyemi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stevesdiary/Ecommerce-backend-with-node/issues"
+    "url": "https://github.com/stevesdiary/E-commerce-backend-with-node/issues"
   },
-  "homepage": "https://github.com/stevesdiary/Ecommerce-backend-with-node#readme"
+  "homepage": "https://github.com/stevesdiary/E-commerce-backend-with-node#readme"
 }

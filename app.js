@@ -21,20 +21,27 @@ app.post('/login', async (req, res) => {
       return res.status(401).send('Invalid username or password')
     }
     const sessionId = uuid();
-    console.log(sessionId)
+    const expiryDate = new Date(Date.now() + (10 * 24 * 3600000));
     sessions[sessionId] = { username, userId: 1 };
-    res.set('Set-Cookie', `session = ${sessionId}`);
+    res.cookie('session', sessionId, {expires: expiryDate});
     res.send('success')
   }
   catch(err){
     return res.status(500).send({Message: `User unable to login`, Error: err.message})
   }
 })
+app.post('/logout', async (req, res) => {
+  const  sessionId = req.headers.cookie?.split('=')[1];
+  const expired = Date.now() - (10 * 6 * 1000)
+  //clear the cookies
+  delete sessions[sessionId];
+  res.set('Set-Cookie', `session =; expires=${expired}`);
+  res.send('Successfully logged out');
+})
 
 app.get('/todos', async (req, res)=> {
   const sessionId = req.headers.cookie?.split('=')[1];
   const userSession = sessions[sessionId];
-  console.log(userSession, "USER SESSION")
   if(!userSession) {
     return res.status(401).send("Invalid session");
   }
