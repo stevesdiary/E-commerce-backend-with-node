@@ -1,7 +1,7 @@
 'use strict';
 const {
   Model,
-  UUIDV4
+  UUID,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey:true,
-      defaultValue: UUIDV4
+      defaultValue: UUID
     },
     first_name: {
       type: DataTypes.STRING,
@@ -65,6 +65,32 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: {
+          msg: 'Invalid email format, kindly enter a valid email.',
+        },
+      },
+    },
+    phone_number: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        isPhoneNumber(value) {
+          const phoneRegex = /^\d{13}$/; // Example: Allow only 10-digit numbers
+          if (!phoneRegex.test(value)) {
+            throw new Error('Invalid phone number format, include the country code');
+          }
+        },
+      },
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     password: {
       type: DataTypes.STRING(64),
       allowNull: false,
@@ -82,11 +108,6 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
       },
-    },
-    type: {
-      type: DataTypes.ENUM("guest", "regular", "premium", "admin"),
-      allowNull: true,
-      defaultValue: "regular",
     },
   }, {
     sequelize,
