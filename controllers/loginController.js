@@ -1,11 +1,12 @@
 const express = require("express");
-// const { admin } = require('../models/admin');
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const cookie = require('cookie');
+const sessionId = uuid();
+const sessions = {};
 const bcrypt = require("bcrypt");
-const { authentication } = require("../middleware/authentication");
+const { authentication } = require("../middlewares/authentication");
 
 const loginController = {
   login: async (req, res) => {
@@ -37,6 +38,10 @@ const loginController = {
         {exiresIn: process.env.LOGIN_EXPIRE},
         // {exp: Math.floor(Date.now() / 1000) + 60 * 60 * 10},
       );
+      const expiryDate = new Date(Date.now() + (10 * 24 * 3600000));
+      sessions[sessionId] = { username, userId: 1 };
+      res.cookie('session', sessionId, {expires: expiryDate});
+
       console.log(`${email} logged in as ${type} user.`);
 
       return res.status(200).json({
@@ -46,6 +51,7 @@ const loginController = {
         last_name: last_name,
         type: type,
         token: accessToken,
+        sessionId: sessionId
       });
 
     }
@@ -53,7 +59,6 @@ const loginController = {
       return res.status(500).send({Message: `User unable to login`, Error: err})
     }
   }
-  
 }
 
 module.exports = loginController;
