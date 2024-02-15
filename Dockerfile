@@ -6,7 +6,7 @@ COPY . /app
 
 RUN npm install
 
-EXPOSE 3301
+COPY . .
 
 ENV NAME Ecommerce-backend-with-node
 
