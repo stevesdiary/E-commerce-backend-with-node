@@ -1,7 +1,8 @@
 const express = require("express");
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
-const router = express.Router();
+const uuid = require('uuid').v4;
+require("dotenv").config;
 const cookie = require('cookie');
 const sessionId = uuid();
 const sessions = {};
@@ -23,6 +24,11 @@ const loginController = {
       } 
       const user = await User.findOne({ where: { email }});
       const id = user.id;
+      console.log(user)
+      const expiryDate = new Date(Date.now() + (60 * 1000));
+      console.log(process.env.JWT_SECRET, "SECRET KEY", expiryDate);
+      sessions[sessionId] = { email, userId: 1 };
+      res.cookie('session', sessionId, {expires: expiryDate});
       const first_name = user.first_name;
       const last_name = user.last_name;
       const type = user.type;
@@ -32,15 +38,14 @@ const loginController = {
             id: id,
             email: userData.email,
             type: user.type,
+            session: sessionId,
           },
         },
-        process.env.JWT_SECRET,
-        {exiresIn: process.env.LOGIN_EXPIRE},
+        '08d1f52e2ee774d2e9f518d065310a6cf46e8e2e6625e1da13d52aa9967231914a87b7',
+        // {exiresIn: expiryDate},
         // {exp: Math.floor(Date.now() / 1000) + 60 * 60 * 10},
       );
-      const expiryDate = new Date(Date.now() + (10 * 24 * 3600000));
-      sessions[sessionId] = { username, userId: 1 };
-      res.cookie('session', sessionId, {expires: expiryDate});
+      
 
       console.log(`${email} logged in as ${type} user.`);
 
@@ -56,7 +61,7 @@ const loginController = {
 
     }
     catch(err){
-      return res.status(500).send({Message: `User unable to login`, Error: err})
+      return res.status(500).send({Message: `User unable to login`, Error: err.message})
     }
   }
 }
