@@ -1,8 +1,5 @@
-// const { UUID, UUIDV4 } = require('sequelize');
 const { v4: uuidv4 } = require("uuid");
 const { User } = require('../models');
-const user = require("../models/user");
-
 
 exports.findAllUser = async (req, res) => {
   try{
@@ -55,8 +52,8 @@ exports.deleteUser = async (req, res ) => {
 exports.updateUser = async (req, res) => {
   try{
     const id = req.params.id;
-    const {first_name, last_name, address, email, phone_number, type } = req.body;
-    const updateUser = await User.update({first_name, last_name, address, email, phone_number, type }, {where: {id}});
+    const {first_name, last_name, address, email,gender, phone_number, type } = req.body;
+    const updateUser = await User.update({first_name, last_name, address, email, gender, phone_number, type }, {where: {id}});
     console.log(updateUser);
     if(updateUser == 1) {
       return res.status(200).send({ message: 'Record Updated' });
