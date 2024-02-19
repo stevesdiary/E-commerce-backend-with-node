@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const verifyType = require('../middleware/verifyType');
+const verifyType = require('../middlewares/verifyUserType');
 const userController = require('../controllers/usercontroller');
-const { authentication } = require('../middleware/authentication');
+const { authentication } = require('../middlewares/authentication');
 
-router.get('/alluser', userController.findAllUser); //authentication, verifyType(['admin']),
+router.get('/alluser', userController.findAllUser); //authentication, verifyType(["admin", 'regular']), 
 
 router.get('/user/:id', userController.findOne); // authentication, verifyType(['admin']),
 
