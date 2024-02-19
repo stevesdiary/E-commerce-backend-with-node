@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.hasMany(models.ProductDetail, { foreignKey: 'product_id', type: DataTypes.UUID, as: 'products' });
+      
     }
   }
   Product.init({
@@ -21,18 +23,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey:true,
       defaultValue: UUID
     },
-    product_name: {
+    descripption: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Product name cannot be empty.",
+          msg: "Product description cannot be empty.",
         },
       },
     },
   }, {
     sequelize,
-    tableName: 'Product',
+    tableName: 'Products',
     modelName: 'Product',
     freezeTableName: true,
     paranoid: true
