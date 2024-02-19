@@ -2,7 +2,6 @@ const express = require("express");
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const uuid = require('uuid').v4;
-require("dotenv").config;
 const cookie = require('cookie');
 const sessionId = uuid();
 const sessions = {};
@@ -26,7 +25,7 @@ const loginController = {
       const id = user.id;
       console.log(user)
       const expiryDate = new Date(Date.now() + (60 * 1000));
-      console.log(process.env.JWT_SECRET, "SECRET KEY", expiryDate);
+      // console.log(process.env.JWT_SECRET, "SECRET KEY", expiryDate);
       sessions[sessionId] = { email, userId: 1 };
       res.cookie('session', sessionId, {expires: expiryDate});
       const first_name = user.first_name;
@@ -41,7 +40,7 @@ const loginController = {
             session: sessionId,
           },
         },
-        '08d1f52e2ee774d2e9f518d065310a6cf46e8e2e6625e1da13d52aa9967231914a87b7',
+        process.env.JWT_SECRET,
         // {exiresIn: expiryDate},
         // {exp: Math.floor(Date.now() / 1000) + 60 * 60 * 10},
       );
