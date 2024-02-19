@@ -1,6 +1,7 @@
 node_modules
-.env
+
 config.js
 .sequelizerc
-
+*.env
+config/config.json
 npm-debug.log
