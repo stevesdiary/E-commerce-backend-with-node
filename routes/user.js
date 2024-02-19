@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyType = require('../middlewares/verifyUserType');
-const userController = require('../controllers/usercontroller');
+const userController = require('../controllers/userController');
 const { authentication } = require('../middlewares/authentication');
 
 router.get('/alluser', userController.findAllUser); //authentication, verifyType(["admin", 'regular']), 
