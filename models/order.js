@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Order.belongsTo(models.Product, {foreignKey: 'order_id', type: DataTypes.UUID, as: 'order' });
     }
   }
   Order.init({
@@ -21,18 +22,37 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false
     },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    time: {
+      type: DataTypes.TIME,
+      allowNull: false
+    },
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: DataTypes.INTEGER,
-    order_number: DataTypes.INTEGER
+    price: {
+      type: DataTypes.DECIMAL(6,2),
+      allowNull: false,
+    },
+    quantity: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+    },
+    order_number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+    }
   }, {
     sequelize,
     tableName: 'Orders',
     modelName: 'Order',
     freezeTableName: true,
-    paranoid: false
+    paranoid: true
   });
   return Order;
 };
