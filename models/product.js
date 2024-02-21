@@ -12,8 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.hasMany(models.ProductDetail, { foreignKey: 'product_id', type: DataTypes.UUID, as: 'products' });
-      
+      Product.hasMany(models.Price, { foreignKey: 'price_id', type: DataTypes.UUID, as: 'price' });
+      Product.hasMany(models.Feature, { foreignKey: 'feature_id', type: DataTypes.UUID, as: 'feature' })
+      Product.hasMany(models.Order, { foreignKey: 'order_id', type: DataTypes.UUID, as: 'order' })
     }
   }
   Product.init({
@@ -22,6 +23,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey:true,
       defaultValue: UUID
+    },
+    feature_id: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    order_id: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price_id: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     descripption: {
       type: DataTypes.STRING,
@@ -32,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    
   }, {
     sequelize,
     tableName: 'Products',
