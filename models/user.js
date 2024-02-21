@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isPhoneNumber(value) {
-          const phoneRegex = /^\d{13}$/; // Example: Allow only 10-digit numbers
+          const phoneRegex = /^\d{13}$/;
           if (!phoneRegex.test(value)) {
             throw new Error('Invalid phone number format, include the country code');
           }
@@ -91,6 +91,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    billing_address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    shipping_address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     type: {
       type: DataTypes.STRING,
       allowNull: false
@@ -98,12 +106,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Password cannot be empty',
-        }
-      },
     },
   }, {
     sequelize,
