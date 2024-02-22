@@ -13,6 +13,7 @@ const loginController = {
     try{
       const {email, password } = req.body;
       const userData = await User.findOne({ where: { email: email } });
+      if (!email || !password) return res.status(404).send({Message: 'Email and Password cannot be empty'})
       if (!userData) {
         return res.status(404).send({ Message: "Email is not correct or not found!" });
       }
@@ -23,9 +24,7 @@ const loginController = {
       } 
       const user = await User.findOne({ where: { email }});
       const id = user.id;
-      console.log(user)
       const expiryDate = new Date(Date.now() + (60 * 1000));
-      // console.log(process.env.JWT_SECRET, "SECRET KEY", expiryDate);
       sessions[sessionId] = { email, userId: 1 };
       res.cookie('session', sessionId, {expires: expiryDate});
       const first_name = user.first_name;
