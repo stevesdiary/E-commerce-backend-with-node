@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Price.belongsTo(models.Product, {foreignKey: 'price_id', type: DataTypes.UUID, as: 'order' });
+      Price.belongsTo(models.Product, {foreignKey: 'price_id', as: 'price' });
     }
   }
   Price.init({
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     discount: {
         type: DataTypes.FLOAT,
         allowNull: false,
+        defaultValue: 0
       },
     sale_price: {
         type: DataTypes.FLOAT,
