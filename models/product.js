@@ -13,8 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Product.hasMany(models.Price, { foreignKey: 'price_id', type: DataTypes.UUID, as: 'price' });
-      Product.hasMany(models.Feature, { foreignKey: 'feature_id', type: DataTypes.UUID, as: 'feature' })
-      Product.hasMany(models.Order, { foreignKey: 'order_id', type: DataTypes.UUID, as: 'order' })
+      Product.hasMany(models.Size, { foreignKey: 'size_id', type: DataTypes.UUID, as: 'size' });
+      Product.hasMany(models.Order, { foreignKey: 'order_id', type: DataTypes.UUID, as: 'order' });
+      Product.hasMany(models.Colour, { foreignKey: 'colour_id', type: DataTypes.UUID, as: 'colour' });
+      Product.hasMany(models.Image, { foreignKey: 'image_id', type: DataTypes.UUID, as: 'image' });
+      Product.hasMany(models.Quantity, { foreignKey: 'quantity_id', type: DataTypes.UUID, as: 'quantity' });
     }
   }
   Product.init({
@@ -24,20 +27,33 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey:true,
       defaultValue: UUID
     },
-    feature_id: {
+    colour_id: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    order_id: {
-      type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     price_id: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    order_id: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    image_id: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    quantity_id: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+      defaultValue: 0
+    },
+    name: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    descripption: {
-      type: DataTypes.STRING,
+    description: {
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
@@ -45,6 +61,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    in_stock: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
     
   }, {
     sequelize,
