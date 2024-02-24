@@ -4,6 +4,8 @@ const verifyType = require('../middlewares/verifyUserType');
 const productController = require('../controllers/productController');
 const { authentication } = require('../middlewares/authentication');
 
+router.post('/createproduct', productController.createProduct);
+
 router.get('/allproduct', productController.findAllProducts); //authentication, verifyType(['admin']),
 
 router.get('/product/:id', productController.findOne); // authentication, verifyType(['admin']),
