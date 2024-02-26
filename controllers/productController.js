@@ -1,7 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { Product, Price } = require('../models');
-const price = require('../models/price');
-const product = require('../models/product');
+const { Product, Price, Colour, Size } = require('../models');
 
 const productController = {
   createProduct: async (req, res) => {
@@ -15,10 +13,14 @@ const productController = {
       const {name, description, in_stock } = req.body;
       const productData = {id, colour_id, price_id, size_id, image_id, quantity_id, name, description, in_stock};
       const newProduct = await Product.create({ productData });
-      if(!newProduct) {return res.status(404).send({Message: `Unable to create record for ${name}`})}
+      if(!newProduct) {throw res.status(404).send({Message: `Unable to create record for ${name}`})}
       const colourData = req.body.colours;
       const colour = await Colour.create({colourData});
-      console.log
+      console.log(colour);
+      const sizeData = req.body.sizes;
+      const size = await Size.create({sizeData});
+      if(!size) throw res.status(404).send({Message: 'Unable to create sizes'});
+      console.log('Sizes created successfully')
     }
     catch(err){
       console.log('Error occoured', err)
