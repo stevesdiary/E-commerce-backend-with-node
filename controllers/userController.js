@@ -52,8 +52,8 @@ exports.deleteUser = async (req, res ) => {
 exports.updateUser = async (req, res) => {
   try{
     const id = req.params.id;
-    const {first_name, last_name, address, email,gender, phone_number, type } = req.body;
-    const updateUser = await User.update({first_name, last_name, address, email, gender, phone_number, type }, {where: {id}});
+    const {first_name, last_name, mailing_address, billing_address, email,gender, phone_number, type } = req.body;
+    const updateUser = await User.update({first_name, last_name, mailing_address, billing_address, email, gender, phone_number, type }, {where: {id}});
     console.log(updateUser);
     if(updateUser == 1) {
       return res.status(200).send({ message: 'Record Updated' });
