@@ -20,7 +20,8 @@ const productController = {
       const sizeData = req.body.sizes;
       const size = await Size.create({sizeData});
       if(!size) throw res.status(404).send({Message: 'Unable to create sizes'});
-      console.log('Sizes created successfully')
+      console.log('Sizes created successfully', size);
+      
     }
     catch(err){
       console.log('Error occoured', err)
