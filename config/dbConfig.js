@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     host: process.env.HOST,
   }
 );
-
+console.log("ENV VALUES", process.env.HOST)
 try {
   sequelize.authenticate();
   console.log("Connection has been established.");
@@ -40,5 +40,4 @@ module.exports = sequelize;
 //   .catch((error) => {
 //     console.error("Unable to connect to the database:", error);
 //   });
-
 // module.exports = sequelize;
