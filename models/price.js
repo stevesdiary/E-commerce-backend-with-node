@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     tableName: 'Price',
     modelName: 'Price',
+    freezeTableName: true,
     paranoid: true
   });
   return Price;
