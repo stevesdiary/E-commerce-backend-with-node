@@ -1,27 +1,67 @@
 const { v4: uuidv4 } = require('uuid');
-const { Product, Price, Colour, Size } = require('../models');
+const { Product, Price, Colour, Size, Quantity } = require('../models');
 
 const productController = {
+
+  // createProduct: async (req, res) => {
+  // // Create a new product
+  //   const {name, description} = req.body;
+  //   const newProduct = await Product.create({
+  //     name,
+  //     description
+  //   });
+
+  //   // Create or find Colour, size, and other attributes
+  //   const {colour} = req.body.colours;
+  //   const Colour = await Colour.findOrCreate({ where: colour });
+  //   const size = await Size.findOrCreate({ where: { name: 'Large' } });
+
+  //   // Create a price record
+  //   const price = await Price.create({
+  //     price: 50.00,
+  //     discountPrice: 40.00,
+  //     salePrice: 45.00,
+  //     currency: 'USD',
+  //   });
+
+  //   // Create a quantity record
+  //   const quantity = await Quantity.create({ quantity: 100 });
+
+  //   // Associate the product with Colour, size, price, and quantity
+  //   await newProduct.addColor(Colour);
+  //   await newProduct.addSize(size);
+  //   await newProduct.addPrice(price);
+  //   await newProduct.addQuantity(quantity);
+
+  //   // Retrieve the product with its associated attributes
+  //   const productWithAttributes = await Product.findByPk(newProduct.id, {
+  //     include: [
+  //       { model: Colour },
+  //       { model: Size },
+  //       { model: Price },
+  //       { model: Quantity },
+  //     ],
+  //   });
+  //   console.log(productWithAttributes);
+  // },
+    
+
+
   createProduct: async (req, res) => {
     const id = uuidv4();
-    const colour_id = uuidv4();
-    const price_id = uuidv4();
-    const size_id = uuidv4();
+    const variation_id = uuidv4();
     const image_id = uuidv4();
-    const quantity_id = uuidv4();
+    const {productVariation} = req.body.variations;
     try{
-      const {name, description, in_stock } = req.body;
-      const productData = {id, colour_id, price_id, size_id, image_id, quantity_id, name, description, in_stock};
+      const {name, category, description, in_stock } = req.body;
+      const productData = {id, variation_id, image_id, name, category, description, in_stock};
       const newProduct = await Product.create({ productData });
       if(!newProduct) {throw res.status(404).send({Message: `Unable to create record for ${name}`})}
-      const colourData = req.body.colours;
-      const colour = await Colour.create({colourData});
-      console.log(colour);
-      const sizeData = req.body.sizes;
-      const size = await Size.create({sizeData});
-      if(!size) throw res.status(404).send({Message: 'Unable to create sizes'});
-      console.log('Sizes created successfully', size);
-      
+    
+      const variation = await Size.create({ id: variation_id, productVariation });
+      if(!variation) throw res.status(404).send({Message: 'Unable to create variations'});
+      console.log('Variations created successfully', variation);
+      const image = await Image.create
     }
     catch(err){
       console.log('Error occoured', err)
@@ -29,75 +69,48 @@ const productController = {
     };
   },
 
+    if (Array.isArray(prices) || prices.length === 0) {
+      return res.status(400).send({Message: 'Price details is missing or empty'})
+    }
+    const product = await Product.create(newProduct);
+    const createdPrices = [];
+      for (const priceData of prices) {
+        const{price, discount, sale_price} = priceData;
 
-
-
-
-
-
-  //   try{
-  //     const prices = req.body.prices;
-  //     const newProduct = req.body;
-  //     const id = uuidv4();
-  //     const price_id = uuidv4();
-  //     // const feature_id = uuidv4();
-  //     // const order_id = uuidv4();
-  //     newProduct.id = id;
-  //     newProduct.price_id = price_id;
-  //     // newProduct.name;
-  //     // newProduct.description;
-  //     // newProduct.feature_id;
-  //     // newProduct.order_id;
-    
-      
-  //     // rturn (product) ? 'Product created successfully' : 'Unable.create product';
-  //   }
-  //   catch(err){
-  //     console.log('An error occoured!', err);
-  //     return res.send({message: 'Error showed up', Error: err.message})
-  //   };
-  //   if (Array.isArray(prices) || prices.length === 0) {
-  //     return res.status(400).send({Message: 'Price details is missing or empty'})
-  //   }
-  //   const product = await Product.create(newProduct);
-  //   const createdPrices = [];
-  //     for (const priceData of prices) {
-  //       const{price, discount, sale_price} = priceData;
-
-  //     }
+      }
       
       
       
-  //     // i = 0; i < prices.length; i++) {
-  //     //   let pricelogs = [];
-  //     //   const price = prices[i].price;
-  //     //   const discount = prices[i].discount;
-  //     //   const sale_price = prices[i].sale_price;
+      // i = 0; i < prices.length; i++) {
+      //   let pricelogs = [];
+      //   const price = prices[i].price;
+      //   const discount = prices[i].discount;
+      //   const sale_price = prices[i].sale_price;
 
-  //       if (price !== null || discount !== null || sale_price !== null ) {
-  //         const product_id = newProduct.id;
+        if (price !== null || discount !== null || sale_price !== null ) {
+          const product_id = newProduct.id;
 
-  //         req.body.prices[i].price_id = price_id;
-  //         req.body.prices[i].product_id = product_id;
+          req.body.prices[i].price_id = price_id;
+          req.body.prices[i].product_id = product_id;
 
-  //         const priceRecord = {
-  //           id: price_id,
-  //           price: price,
-  //           discount: discount,
-  //           sale_price: sale_price
-  //         };
-  //         pricelogs.push(priceRecord)
-  //       }
-  //       else{
-  //         return res.send({Message: `Product details not created because other details are not included`})
-  //       }
-  //     }
-  //     // const createdProduct = await Product.findOne({id});
-  //     // productName = createdProduct.name;
-  //     // const createPrice = await Price.bulkCreate(req.body.devices).then(() => {
-  //     //   return res.status(201).send({Message: `Product records for ${productName}`, Results: {createdProduct, createPrice}})
-  //     // })
-  //   },
+          const priceRecord = {
+            id: price_id,
+            price: price,
+            discount: discount,
+            sale_price: sale_price
+          };
+          pricelogs.push(priceRecord)
+        }
+        else{
+          return res.send({Message: `Product details not created because other details are not included`})
+        }
+      }
+      const createdProduct = await Product.findOne({id});
+      productName = createdProduct.name;
+      const createPrice = await Price.bulkCreate(req.body.devices).then(() => {
+        return res.status(201).send({Message: `Product records for ${productName}`, Results: {createdProduct, createPrice}})
+      })
+    }
       
 
 
