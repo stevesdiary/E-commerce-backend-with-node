@@ -12,7 +12,6 @@ const featureController = {
   },
 
 
-
   findAllFeatures: async (req, res) => {
     try{
       const features = await Feature.findAndCountAll({
