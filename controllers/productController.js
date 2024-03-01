@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { Product, Price, Colour, Size, Quantity } = require('../models');
+const { Product, Variation } = require('../models');
 
 const productController = {
 
@@ -58,7 +58,7 @@ const productController = {
       const newProduct = await Product.create({ productData });
       if(!newProduct) {throw res.status(404).send({Message: `Unable to create record for ${name}`})}
     
-      const variation = await Size.create({ id: variation_id, productVariation });
+      const variation = await Variation.create({ id: variation_id, productVariation });
       if(!variation) throw res.status(404).send({Message: 'Unable to create variations'});
       console.log('Variations created successfully', variation);
       const image = await Image.create
