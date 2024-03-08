@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const { User } = require('../models');
+const errorHandler = require('../services/errorHandler');
 
 exports.findAllUser = async (req, res) => {
   try{
