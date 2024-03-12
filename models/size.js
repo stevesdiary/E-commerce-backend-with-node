@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  UUID
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Size extends Model {
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Size.belongsToMany(models.Product, {foreignKey: 'size_id', as: 'size'})
+      // Size.belongsToMany(models.Product, {foreignKey: 'size_id', as: 'size'})
     }
   }
   Size.init({
