@@ -37,11 +37,21 @@ module.exports = (sequelize, DataTypes) => {
     // },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Product name cannot be empty.",
+        },
+      },
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Product category cannot be empty.",
+        },
+      },
     },
     description: {
       type: DataTypes.TEXT,
