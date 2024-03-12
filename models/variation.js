@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Variations',
     modelName: 'Variation',
     freezeTableName: true,
-    paranoid: false
+    paranoid: true
   });
   return Variation;
 };
