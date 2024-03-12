@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  UUID
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Image.belongsToMany(models.Product, { foreignKey: 'image_id', as: 'image' });
+      // Image.belongsToMany(models.Product, { foreignKey: 'image_id', as: 'image' });
     }
   }
   Image.init({
