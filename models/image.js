@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Images',
     modelName: 'Image',
     freezeTableName: true,
-    paranoid: false
+    paranoid: true
   });
   return Image;
 };
