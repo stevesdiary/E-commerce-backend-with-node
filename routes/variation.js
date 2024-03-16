@@ -1,4 +1,3 @@
-const express = require('express');
 const router = express.Router();
 const verifyType = require('../middlewares/verifyUserType');
 const variationController = require('../controllers/variationController');
