@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    
     category: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -53,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -62,6 +64,17 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+
+    price: {
+      type: DataTypes.FLOAT(5,2),
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Price must not be null. Use 0 if it's free"
+        }
+      }
+    },
+
     in_stock: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
