@@ -3,10 +3,9 @@ const { Product, Variation } = require('../models');
 const price = require('../models/price');
 
 const productController = {
-
   createProduct: async (req, res) => {
   // Create a new product
-    const {name, description} = req.body;
+    const {name, description, price, } = req.body;
     const newProduct = await Product.create({
       name,
       description
