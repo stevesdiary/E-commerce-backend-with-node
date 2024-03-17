@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     pattern: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    quantity: {
+      type: DataTypes.TINYINT,
+      allowNull: false
     }
   }, {
     sequelize,
