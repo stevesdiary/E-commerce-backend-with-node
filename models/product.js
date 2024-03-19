@@ -75,6 +75,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
 
+    discount: {
+      type: DataTypes.FLOAT(3,2),
+      allowNull: true
+    },
+
     in_stock: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
