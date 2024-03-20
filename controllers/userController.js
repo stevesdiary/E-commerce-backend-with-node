@@ -26,10 +26,10 @@ exports.findOne =  async (req, res) => {
         exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt']
       }});
     console.log('User found', user);
-    return res.status(200).send({message: 'User found', user });
+    return res.status(200).send({ message: 'User found', user });
   }catch(err){
     console.log('Error occoured', err)
-    res.status(500).send({message: 'Error happened', err});
+    res.status(500).send({ message: 'Error happened', err });
   };
 };
 
@@ -37,7 +37,7 @@ exports.deleteUser = async (req, res ) => {
   try{
     const id = req.params.id;
     console.log("IDDDD", id)
-    const user = await User.destroy({where: {id}})
+    const user = await User.destroy({ where: {id}} )
     // console.log(user)
     if (user == 1 ){
       return res.send({message: `User with id ${id} has been deleted successfully!`})
