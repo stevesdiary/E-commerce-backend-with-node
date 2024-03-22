@@ -87,10 +87,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    gender: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     billing_address: {
       type: DataTypes.STRING,
       allowNull: true
@@ -100,13 +96,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     type: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(['Regular', 'Admin', 'Premium']),
       allowNull: false
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    
   }, {
     sequelize,
     tableName: 'Users',
