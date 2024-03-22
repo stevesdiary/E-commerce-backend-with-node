@@ -29,13 +29,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    pattern: {
+    style: {
       type: DataTypes.STRING,
       allowNull: true
     },
     quantity: {
       type: DataTypes.TINYINT,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0,
     }
   }, {
     sequelize,
