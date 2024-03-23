@@ -1,6 +1,22 @@
+const { UUIDV4 } = require('sequelize');
 const { Order } = require('../models');
 
 const orderController = {
+  createOrder: async (req, res) => {
+    try {
+      const id = UUIDV4;
+      const { date, time, product_name, price, quantity, order_number } = req.params;
+
+      consol.log("OrderID", id)
+      const order = await Order.create({ id, date, time, product_name, price, quantity, order_number  })
+    }
+    catch(err) {
+      return res.status(500).send({ Meaasge: "An error occoured", Error: "error"})
+    }
+    
+    
+  },
+
   findAllOrders: async (req, res) => {
     try{
       const orders = await Order.findAndCountAll({
@@ -9,7 +25,7 @@ const orderController = {
         }
       });
       // console.log('Records found', orders)
-      return res.status(200).send({Message: 'Records found', Result: orders})
+      return res.status(200).send({ Message: 'Records found', Result: orders })
     }catch(err){
       console.log('An error occoured!', err);
       return res.send({message: 'Error showed up', err})
