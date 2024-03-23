@@ -1,4 +1,3 @@
-const express = require("express");
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const uuid = require('uuid').v4;
