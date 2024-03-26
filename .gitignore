@@ -1,6 +1,5 @@
 node_modules
 
-config.js
 # .sequelizerc
 *.env
 config/config.json
