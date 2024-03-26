@@ -1,5 +1,3 @@
-const express = require("express");
-
 const logoutController = {
   logout: async (req, res) => {
     const sessions = {};
