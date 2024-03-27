@@ -1,8 +1,9 @@
 'use strict';
 const {
   Model,
-  UUID
+  UUIDV4
 } = require('sequelize');
+const product = require('./product');
 module.exports = (sequelize, DataTypes) => {
   class Variation extends Model {
     /**
@@ -11,14 +12,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Variation.belongsTo(models.Product, {as: 'products', targetKey: 'product_id', sourceKey: 'product_id', foreignKey: 'product_id'});
     }
   }
   Variation.init({
-    id: {
+    variation_id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: UUID,
+      defaultValue: UUIDV4,
+      allowNull: false
+    },
+    product_id: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     colour: {
