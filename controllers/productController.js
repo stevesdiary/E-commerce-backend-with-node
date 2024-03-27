@@ -44,28 +44,28 @@ const productController = {
     };
   },
 
-  // findAllProducts: async (req, res) => {
-  //   try{
-  //     const products = await Product.findAll({
-  //       attributes: {
-  //         exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
-  //       },
-  //       include: [
-  //         {
-  //           model: Variation,
-  //           as: 'variations',
-  //           attributes: {
-  //             exclude: ['createdAt', 'updatedAt', 'deletedAt']
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     return res.status(200).send({ Message: 'Records found', Result: products })
-  //   }catch(err){
-  //     console.log('An error occoured!', err);
-  //     return res.send({ Message: 'Error showed up', Error: err.message})
-  //   };
-  // },
+  findAllProducts: async (req, res) => {
+    try{
+      const products = await Product.findAll({
+        attributes: {
+          exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
+        },
+        include: [
+          {
+            model: Variation,
+            as: 'variations',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt', 'deletedAt']
+            }
+          }
+        ]
+      });
+      return res.status(200).send({ Message: 'Records found', Result: products })
+    }catch(err){
+      console.log('An error occoured!', err);
+      return res.send({ Message: 'Error showed up', Error: err.message})
+    };
+  },
 
 //   findOne: async (req, res) => {
 //     try{
