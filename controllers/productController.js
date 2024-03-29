@@ -1,6 +1,9 @@
 const { v4: uuidv4 } = require('uuid');
-const { Product, Variation } = require('../models');
+const { Product, Variation, Sequelize } = require('../models');
+// const {Op} = require('sequelize')
 const { findBySize } = require('./variationController');
+const Op = Sequelize.Op;
+
 
 const productController = {   
   createProduct: async (req, res) => {
@@ -45,19 +48,21 @@ const productController = {
   },
 
   findAllProducts: async (req, res) => {
-    // let nameCatDescriptionSearch = [];
-    // if (search) {
-    //   nameCatDescriptionSearch.push({
-    //     [Op.or]: [
-    //       { name: { [Op.like]: `%${search}%` } },
-    //       { category: { [Op.like]: `%${search}%` } },
-    //       { description: { [Op.like]: `%${search}%` } },
-    //     ],
-    //   });
-    // }
-    // const whereConditions = {
-    //   [Op.and]: [...nameCatDescriptionSearch],
-    // };
+    const search = req.query.search;
+    let nameCatDescriptionSearch = [];
+    if (search) {
+      nameCatDescriptionSearch.push({
+        [Op.or]: [
+          { name: { [Op.like]: `%${search}%` } },
+          // { category: { [Op.like]: `%${search}%` } },
+          // { description: { [Op.like]: `%${search}%` } },
+        ],
+      });
+    }
+    const whereConditions = {
+      [Op.and]: [...nameCatDescriptionSearch],
+    };
+    
     try{
       const {price, discount} = req.query;
       const search = req.query.search;
@@ -65,6 +70,7 @@ const productController = {
         attributes: {
           exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
         },
+        where: whereConditions,
         include: [
           {
             model: Variation,
@@ -75,7 +81,7 @@ const productController = {
           }
         ]
       });
-      return res.status(200).send({ Message: 'Records found', Result: products })
+      return res.status(200).send({ Message: 'Records found',  Result: products })
     }catch(err){
       console.log('An error occoured!', err);
       return res.send({ Message: 'Error showed up', Error: err.message})
