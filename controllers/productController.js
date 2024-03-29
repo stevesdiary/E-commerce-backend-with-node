@@ -45,7 +45,22 @@ const productController = {
   },
 
   findAllProducts: async (req, res) => {
+    // let nameCatDescriptionSearch = [];
+    // if (search) {
+    //   nameCatDescriptionSearch.push({
+    //     [Op.or]: [
+    //       { name: { [Op.like]: `%${search}%` } },
+    //       { category: { [Op.like]: `%${search}%` } },
+    //       { description: { [Op.like]: `%${search}%` } },
+    //     ],
+    //   });
+    // }
+    // const whereConditions = {
+    //   [Op.and]: [...nameCatDescriptionSearch],
+    // };
     try{
+      const {price, discount} = req.query;
+      const search = req.query.search;
       const products = await Product.findAll({
         attributes: {
           exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
@@ -67,78 +82,78 @@ const productController = {
     };
   },
 
-//   findOne: async (req, res) => {
-//     try{
-//       const product_id = req.params.id;
+  findOne: async (req, res) => {
+    try{
+      const product_id = req.params.id;
+      
+      const product = await Product.findOne({
+        where: { product_id }, 
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'deletedAt']
+        },
+        include: [
+          {
+            model: Variation,
+            as: 'variations',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt', 'deletedAt']
+            }
+          }
+        ]
+      });
+      return res.status(200).send({ Message: 'Product found', Result: product });
+    }catch(err){
+      console.log('Error occoured', err)
+      res.status(500).send({message: 'Error happened', Error: err.message});
+    };
+  },
+  findBySize: async (req, res) => {
+    try{
+      const size = req.query.size;
+      const product = await Product.findOne({
+        where: {size}, 
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'deletedAt']
+        }
+      });
+      console.log('Variation found', variation);
+      return res.status(200).send({message: 'Variation found', variation });
+    }catch(err){
+      console.log('Error occoured', err)
+      res.status(500).send({message: 'Error happened', Error: err.message});
+    };
+  },
+  deleteProduct: async (req, res ) => {
+    try{
+      const product_id = req.params.id;
+      console.log("IDDDD", product_id)
+      const product = await Product.destroy({where: {product_id}});
 
-//       const product = await Product.findOne({
-//         where: { product_id }, 
-//         attributes: {
-//           exclude: ['createdAt', 'updatedAt', 'deletedAt']
-//         },
-//         include: [
-//           {
-//             model: Variation,
-//             as: 'variations',
-//             attributes: {
-//               exclude: ['createdAt', 'updatedAt', 'deletedAt']
-//             }
-//           }
-//         ]
-//       });
-//       return res.status(200).send({ Message: 'Product found', Result: product });
-//     }catch(err){
-//       console.log('Error occoured', err)
-//       res.status(500).send({message: 'Error happened', Error: err.message});
-//     };
-//   },
-//   findBySize: async (req, res) => {
-//     try{
-//       const size = req.query.size;
-//       const product = await Product.findOne({
-//         where: {size}, 
-//         attributes: {
-//           exclude: ['createdAt', 'updatedAt', 'deletedAt']
-//         }
-//       });
-//       console.log('Variation found', variation);
-//       return res.status(200).send({message: 'Variation found', variation });
-//     }catch(err){
-//       console.log('Error occoured', err)
-//       res.status(500).send({message: 'Error happened', Error: err.message});
-//     };
-//   },
-//   deleteProduct: async (req, res ) => {
-//     try{
-//       const product_id = req.params.id;
-//       console.log("IDDDD", product_id)
-//       const product = await Product.destroy({where: {product_id}});
+      if (product == 1 ){
+        return res.send({message: `User with id ${product_id} has been deleted successfully!`})
+      }
+      if(user == 0){
+        return res.send({message: `User ${id} does not exist or is deleted in the database`})
+      }
+    }catch(err){
+      return res.status(500).send({message: 'Error occoured', Error: err.message})
+    }
+  },
 
-//       if (product == 1 ){
-//         return res.send({message: `User with id ${product_id} has been deleted successfully!`})
-//       }
-//       if(user == 0){
-//         return res.send({message: `User ${id} does not exist or is deleted in the database`})
-//       }
-//     }catch(err){
-//       return res.status(500).send({message: 'Error occoured', Error: err.message})
-//     }
-//   },
-
-//   updateProduct: async (req, res) => {
-//   try{
-//     const id = req.params.id;
-//     const {name, address, email, phone_number, type } = req.body;
-//     const updateProduct = await User.update({name, address, email, phone_number, type }, {where: {id}});
-//     console.log(updateProduct);
-//     if(updateProduct == 1) {
-//       return res.status(200).send({ message: 'Record Updated' });
-//     }
-//   } catch (err) {
-//     console.log(err.message);
-//     return res.status(500).send({message: 'Error occoured', Error: err.message})
-//   }
-//   }
+  updateProduct: async (req, res) => {
+  try{
+    const id = req.params.id;
+    const {name, address, email, phone_number, type } = req.body;
+    const updateProduct = await User.update({name, address, email, phone_number, type }, {where: {id}});
+    console.log(updateProduct);
+    if(updateProduct == 1) {
+      return res.status(200).send({ message: 'Record Updated' });
+    }
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({message: 'Error occoured', Error: err.message})
+  }
+  }
   
 }
 
