@@ -3,24 +3,25 @@ const { Variation } = require('../models');
 const variationController = {
   findAllVariations: async (req, res) => {
     try{
-      const variations = await Variation.findAndCountAll({
+      const variations = await Variation.findAll({
         attributes: {
-          exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt']
+          exclude: ['createdAt', 'updatedAt', 'deletedAt']
         }
       });
       // console.log('Records found', variations)
-      return res.status(200).send({message: 'Records found', variations})
+      return res.status(200).send({ Message: 'Records found', variations})
     }catch(err){
       console.log('An error occoured!', err);
       return res.send({message: 'Error showed up', Error: err.message})
     };
   },
 
-  findOne: async (req, res) => {
+  findBySize: async (req, res) => {
     try{
-      const id = req.params.id;
-      const variation = await Variation.findOne({
-        where: {id}, 
+      const size = req.query.size;
+      console.log(size);
+      const variation = await Variation.findAll({
+        where: {size}, 
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'deletedAt']
         }
