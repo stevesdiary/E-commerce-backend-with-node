@@ -1,7 +1,7 @@
 'use strict';
 const {
   Model,
-  UUID,
+  UUIDV4,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
@@ -11,30 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Product.hasMany(models.Variation, { foreignKey: 'variation_id', type: DataTypes.UUID, as: 'variation' });
-      // Product.hasMany(models.Size, { foreignKey: 'size_id', type: DataTypes.UUID, as: 'size' });
-      // Product.hasMany(models.Order, { foreignKey: 'order_id', type: DataTypes.UUID, as: 'order' });
-      // Product.hasMany(models.Colour, { foreignKey: 'colour_id', type: DataTypes.UUID, as: 'colour' });
-      Product.hasMany(models.Image, { foreignKey: 'image_id', type: DataTypes.UUID, as: 'image' });
+      Product.hasMany(models.Variation, { foreignKey: 'product_id', type: DataTypes.UUID, as: 'variations' });
+      // Product.hasMany(models.Image, { foreignKey: 'image_id', type: DataTypes.UUID, as: 'image' });
       // Product.hasMany(models.Quantity, { foreignKey: 'quantity_id', type: DataTypes.UUID, as: 'quantity' });
     }
   }
   Product.init({
-    id: {
+    product_id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey:true,
-      defaultValue: UUID
+      defaultValue: UUIDV4
     },
-    // variation_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true
-    // },
-    // image_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true
-    // },
+    variation_id: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    image_id: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -77,7 +73,8 @@ module.exports = (sequelize, DataTypes) => {
 
     discount: {
       type: DataTypes.FLOAT(3,2),
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     },
 
     in_stock: {
