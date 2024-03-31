@@ -64,9 +64,8 @@ const productController = {
     };
     
     try{
-      const {price, discount} = req.query;
-      const search = req.query.search;
-      const products = await Product.findAll({
+      // const {price, discount} = req.query;
+      const { count, rows: products } = await Product.findAndCountAll({
         attributes: {
           exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
         },
@@ -81,7 +80,7 @@ const productController = {
           }
         ]
       });
-      return res.status(200).send({ Message: 'Records found',  Result: products })
+      return res.status(200).send({ Message: 'Records found', Count: count, Product: products })
     }catch(err){
       console.log('An error occoured!', err);
       return res.send({ Message: 'Error showed up', Error: err.message})
