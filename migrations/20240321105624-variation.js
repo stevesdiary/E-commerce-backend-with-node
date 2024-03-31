@@ -4,8 +4,12 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Variations', {
-      id: {
+      variation_id: {
         type: Sequelize.UUID,
+        allowNull: false
+      },
+      product_id: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       colour: {
@@ -34,8 +38,9 @@ module.exports = {
         
       },
       deletedAt: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: null
       }
     })
   },
