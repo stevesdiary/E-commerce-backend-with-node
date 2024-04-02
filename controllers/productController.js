@@ -49,13 +49,21 @@ const productController = {
 
   findAllProducts: async (req, res) => {
     const search = req.query.search;
+    const { size, color, style } = req.query;
+    const variationWhere = {};
+    const queryParams = { size, color, style };
+    Object.keys(queryParams).forEach(key => {
+      if (queryParams[key] !== undefined) {
+        variationWhere[key] = queryParams[key];
+      }
+    });
     let nameCatDescriptionSearch = [];
     if (search) {
       nameCatDescriptionSearch.push({
         [Op.or]: [
           { name: { [Op.like]: `%${search}%` } },
-          // { category: { [Op.like]: `%${search}%` } },
-          // { description: { [Op.like]: `%${search}%` } },
+          { category: { [Op.like]: `%${search}%` } },
+          { description: { [Op.like]: `%${search}%` } },
         ],
       });
     }
@@ -64,8 +72,10 @@ const productController = {
     };
     
     try{
-      // const {price, discount} = req.query;
-      const { count, rows: products } = await Product.findAndCountAll({
+      const totalCount = await Product.count({
+        where: whereConditions
+      });
+      const products = await Product.findAll({
         attributes: {
           exclude: [ 'createdAt', 'updatedAt', 'deletedAt'],
         },
@@ -76,11 +86,12 @@ const productController = {
             as: 'variations',
             attributes: {
               exclude: ['createdAt', 'updatedAt', 'deletedAt']
-            }
+            },
+            where: variationWhere
           }
         ]
       });
-      return res.status(200).send({ Message: 'Records found', Count: count, Product: products })
+      return res.status(200).send({ Message: 'Records found', Count: totalCount, Product: products })
     }catch(err){
       console.log('An error occoured!', err);
       return res.send({ Message: 'Error showed up', Error: err.message})
