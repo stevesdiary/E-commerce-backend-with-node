@@ -14,7 +14,7 @@ const priceRoute =  require('./routes/price');
 const variationRoute = require('./routes/variation');
 
 app.get('/', (req, res) => {
-  res.send('App running on docker!');
+  res.send('App is running!');
 })
 app.use('/', registerRoute);
 app.use('/', loginRoute);
