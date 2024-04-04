@@ -12,37 +12,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Price.belongsTo(models.Product, {foreignKey: 'price_id' });
+      WishList.belongsTo(models.User, {foreignKey: 'user_id', type: DataTypes.UUID });
+      WishList.belongsTo(models.Product, {foreignKey: 'product_id', type: DataTypes.UUID });
     }
   }
   WishList.init({
-    id: {
+    wish_id: {
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
       defaultValue: UUID
     },
     product_id: {
-      type: DataTypes.SRING,
+      type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          msg: "product_id must not be empty"
+        }
+      }
     },
-    price: {
-        type: DataTypes.DECIMAL(5,2),
-        allowNull: false,
-      },
-    discount: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-        defaultValue: 0
-      },
-    sale_price: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
+    user_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "user_id must not be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     tableName: 'WishLists',
-    modelName: 'Wishlist',
+    modelName: 'WishList',
     freezeTableName: true,
     paranoid: true
   });
