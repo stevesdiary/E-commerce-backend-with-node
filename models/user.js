@@ -2,6 +2,7 @@
 const {
   Model,
   UUID,
+  UUIDV4,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -11,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.WishList, {foreignKey: 'wish_id', DataTypes: UUID, as: 'wishList'})
     }
   }
   User.init({
-    id: {
+    user_id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey:true,
-      defaultValue: UUID
+      defaultValue: UUIDV4
     },
     first_name: {
       type: DataTypes.STRING,
@@ -59,28 +60,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isPhoneNumber(value) {
           const phoneRegex = /^\d{13}$/;
-          if (!phoneRegex.test(value)) {
-            throw new Error('Invalid phone number format, include the country code');
-          }
-        },
-      },
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: {
-          msg: 'Invalid email format, kindly enter a valid email.',
-        },
-      },
-    },
-    phone_number: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      validate: {
-        isPhoneNumber(value) {
-          const phoneRegex = /^\d{13}$/; // Example: Allow only 10-digit numbers
           if (!phoneRegex.test(value)) {
             throw new Error('Invalid phone number format, include the country code');
           }
