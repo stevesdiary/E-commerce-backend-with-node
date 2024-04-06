@@ -4,11 +4,11 @@ const verifyType = require('../middlewares/verifyUserType');
 const orderController = require('../controllers/orderController');
 const { authentication } = require('../middlewares/authentication');
 
-router.get('/allorders', orderController.findAllOrders); //authentication, verifyType(['admin']),
+router.post('/order', orderController.createOrder);
 
-router.get('/order/:id', orderController.findOne); // authentication, verifyType(['admin']),
+router.get('/allorders', orderController.findAllOrders);
 
-router.put('/order/:id', orderController.updateOrder); //authentication, verifyType(['admin'])
+router.put('/order/:id', orderController.updateOrder);
 
 router.delete('/order/:id', orderController.deleteOrder);
 
