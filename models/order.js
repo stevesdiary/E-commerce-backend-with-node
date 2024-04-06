@@ -12,40 +12,40 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Order.belongsTo(models.Product, {foreignKey: 'order_id', as: 'order' });
+      Order.belongsTo(models.Product, {foreignKey: 'product_id' });
+      Order.belongsTo(models.User, {foreignKey: 'user_id' })
     }
   }
   Order.init({
-    id: {
+    order_id: {
       type: DataTypes.UUID,
       defaultValue: UUID,
       primaryKey: true,
       allowNull: false
     },
+    product_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     date: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: false
     },
     time: {
       type: DataTypes.TIME,
       allowNull: false
-    },
-    product_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    price: {
-      type: DataTypes.DECIMAL(6,2),
-      allowNull: false,
     },
     quantity: {
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
     order_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.SMALLINT,
       allowNull: false,
-      autoIncrement: true,
     }
   }, {
     sequelize,
