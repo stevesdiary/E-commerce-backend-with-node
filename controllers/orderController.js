@@ -1,34 +1,62 @@
-const { UUIDV4 } = require('sequelize');
-const { Order } = require('../models');
+const { Order, Product, User } = require('../models');
+const moment = require('moment');
+const dayjs = require('dayjs');
+const { v4: uuidv4 } = require('uuid');
 
 const orderController = {
   createOrder: async (req, res) => {
     try {
-      const id = UUIDV4;
-      const { date, time, product_name, price, quantity, order_number } = req.params;
+      const order_id = uuidv4();
+      console.log('order', order_id);
+      const date = dayjs().format('YYYY-MM-DD');
+      // console.log('Initialization complete', Temporal.Now.instant());
+      const time = dayjs().format('HH:mm:ss A')
+      console.log(time, date)
 
-      consol.log("OrderID", id)
-      const order = await Order.create({ id, date, time, product_name, price, quantity, order_number  })
+      // const currentTime = Temporal.Now.plainTimeISO();
+      // const time = `${currentTime.hour}-${currentTime.minute}-${currentTime.second}`;
+      // const time = moment().format('LT');
+      // console.log("DATE", date.toString(), time);
+      const order_number = Math.floor(1000 + Math.random() * 9000);
+      const { product_id, user_id, quantity } = req.query;
+      const order = await Order.create({ order_id, product_id, user_id, date, time, quantity, order_number });
+      return res.status(201).send({ Message: `Order created with order number ${order_number}`, Result: order });
     }
-    catch(err) {
-      return res.status(500).send({ Meaasge: "An error occoured", Error: "error"})
-    }
-    
-    
+    catch(err){
+      console.log('An error occoured!', err);
+      res.status(500).send({message: 'Error showed up', err})
+    };
   },
 
   findAllOrders: async (req, res) => {
     try{
       const orders = await Order.findAndCountAll({
         attributes: {
-          exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt']
-        }
+          exclude: [ 'createdAt', 'updatedAt', 'deletedAt']
+        },
+        include: [
+          {
+            model: User,
+            as: 'User',
+            attributes: {
+              exclude: [ 'password', 'createdAt', 'updatedAt', 'deletedAt' ]
+            },
+          },
+          {
+            model: Product,
+            as: 'Product',
+            attributes: {
+              exclude: [ 'createdAt', 'updatedAt', 'deletedAt' ]
+            },
+          },
+        ]
       });
       // console.log('Records found', orders)
       return res.status(200).send({ Message: 'Records found', Result: orders })
     }catch(err){
       console.log('An error occoured!', err);
-      return res.send({message: 'Error showed up', err})
+      res.status(500).send({message: 'Error happened', Error: err.message});
+      // return res.send({message: 'Error showed up', err});
     };
   },
 
