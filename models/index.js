@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const dbConfig = require('../config/dbConfig');
 const db = {};
+const chalk = require('chalk');
 
 let sequelize;
 sequelize = new Sequelize(
@@ -20,7 +21,7 @@ sequelize = new Sequelize(
 
 try {
     sequelize.authenticate();
-    console.log("Connection has been established.");
+    console.log(chalk.green.bold("Connection has been established."));
   } catch (error) {
     console.log("Unable to connect to the database", error);
   }
