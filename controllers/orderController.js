@@ -9,17 +9,10 @@ const orderController = {
       const order_id = uuidv4();
       console.log('order', order_id);
       const date = dayjs().format('YYYY-MM-DD');
-      // console.log('Initialization complete', Temporal.Now.instant());
-      const time = dayjs().format('HH:mm:ss A')
-      console.log(time, date)
-
-      // const currentTime = Temporal.Now.plainTimeISO();
-      // const time = `${currentTime.hour}-${currentTime.minute}-${currentTime.second}`;
-      // const time = moment().format('LT');
-      // console.log("DATE", date.toString(), time);
+      const time = dayjs().format('HH:mm A')
       const order_number = Math.floor(1000 + Math.random() * 9000);
-      const { product_id, user_id, quantity } = req.query;
-      const order = await Order.create({ order_id, product_id, user_id, date, time, quantity, order_number });
+      const { product_id, user_id, quantity, status } = req.query;
+      const order = await Order.create({ order_id, product_id, user_id, date, time, quantity, order_number, status });
       return res.status(201).send({ Message: `Order created with order number ${order_number}`, Result: order });
     }
     catch(err){
@@ -51,7 +44,6 @@ const orderController = {
           },
         ]
       });
-      // console.log('Records found', orders)
       return res.status(200).send({ Message: 'Records found', Result: orders })
     }catch(err){
       console.log('An error occoured!', err);
