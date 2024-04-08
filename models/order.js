@@ -46,6 +46,15 @@ module.exports = (sequelize, DataTypes) => {
     order_number: {
       type: DataTypes.SMALLINT,
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM(['Successful', 'Pending', 'Failed']),
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Status must be one of 'Successful', 'Pending' or 'Failed'`
+        }
+      }
     }
   }, {
     sequelize,
