@@ -1,13 +1,13 @@
 const { v4: uuidv4 } = require('uuid');
 const { Product, Variation, Sequelize } = require('../models');
-// const {Op} = require('sequelize')
-const { findBySize } = require('./variationController');
+// const { findBySize } = require('./variationController');
+const emoji  = require('node-emoji');
 const Op = Sequelize.Op;
 
 
 const productController = {   
   createProduct: async (req, res) => {
-    const id = uuidv4();
+    const product_id = uuidv4();
     const variation_id = uuidv4();
     const image_id = uuidv4();
     const productVariation = req.body.variations;
@@ -22,13 +22,13 @@ const productController = {
         for (let i = 0; i < productVariation.length; i++) {
           const variation = productVariation[i];
 
-          const size = productVariation[i].size;
-          const quantity = productVariation[i].quantity;
-          const style = productVariation[i].style;
-          const colour = productVariation[i].colour;
+          const size = variation.size;
+          const quantity = variation.quantity;
+          const style = variation.style;
+          const colour = variation.colour;
 
           const newRecord = {
-            product_id: id,
+            product_id,
             size,
             colour,
             style,
@@ -36,7 +36,6 @@ const productController = {
           };
           variationsArray.push(newRecord);
           const variations = await Variation.bulkCreate([newRecord]);
-          // console.log(variations, 'reccord done')
         }
         return res.status(201).send({ Message: 'Product record created with its variations!', Result: {newProduct} });
       }
@@ -94,7 +93,7 @@ const productController = {
       return res.status(200).send({ Message: 'Records found', Count: totalCount, Product: products })
     }catch(err){
       console.log('An error occoured!', err);
-      return res.send({ Message: 'Error showed up', Error: err.message})
+      return res.send({ Message: emoji.emojify('Error showed up :angry-face:'), Error: err.message})
     };
   },
 
@@ -132,8 +131,7 @@ const productController = {
           exclude: ['createdAt', 'updatedAt', 'deletedAt']
         }
       });
-      console.log('Variation found', variation);
-      return res.status(200).send({message: 'Variation found', variation });
+      return res.status(200).send({ message: 'Variation found', Result: product });
     }catch(err){
       console.log('Error occoured', err)
       res.status(500).send({message: 'Error happened', Error: err.message});
@@ -141,16 +139,12 @@ const productController = {
   },
   deleteProduct: async (req, res ) => {
     try{
-      const product_id = req.params.id;
-      console.log("IDDDD", product_id)
+      const product_id = req.params.product_id;
       const product = await Product.destroy({where: {product_id}});
-
-      if (product == 1 ){
-        return res.send({message: `User with id ${product_id} has been deleted successfully!`})
-      }
-      if(user == 0){
-        return res.send({message: `User ${id} does not exist or is deleted in the database`})
-      }
+      const message = product === 1
+      ? `Product with id ${product_id} has been deleted successfully!`
+      : `Product with id ${product_id} does not exist or is deleted in the database`;
+      return res.status(200).send({ message });
     }catch(err){
       return res.status(500).send({message: 'Error occoured', Error: err.message})
     }
