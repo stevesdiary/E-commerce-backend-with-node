@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Product.hasMany(models.Variation, { foreignKey: 'product_id', type: DataTypes.UUID, as: 'variations' });
-      // Product.hasMany(models.Image, { foreignKey: 'image_id', type: DataTypes.UUID, as: 'image' });
+      Product.hasMany(models.WishList, { foreignKey: 'product_id', type: DataTypes.UUID, as: 'product' });
+      Product.hasMany(models.Image, { foreignKey: 'image_id', type: DataTypes.UUID, as: 'image' });
+
       // Product.hasMany(models.Quantity, { foreignKey: 'quantity_id', type: DataTypes.UUID, as: 'quantity' });
     }
   }
