@@ -7,9 +7,7 @@ const wishListController = {
     const wish_id = uuidv4();
     try{
       const { product_id, user_id } = req.query;
-      let newWishList = { wish_id, user_id, product_id };
-      // console.log("WISH DETAILS: ", newWishList )
-      const wishList = await WishList.create( newWishList );
+      const wishList = await WishList.create( { wish_id, user_id, product_id } );
       return res.status(201).send({ Message: 'Item has been added to your wishlist!', Result: wishList });
     }
     catch(err){
@@ -86,8 +84,8 @@ const wishListController = {
       const wish = await WishList.destroy({where: {wish_id}})
       const message = wish === 1
       ? `Wish with id ${wish_id} has been deleted successfully!`
-      : `User ${wish_id} does not exist or is deleted in the database`;
-      return res.send({ message });
+      : `Wish with id ${wish_id} does not exist or is deleted in the database`;
+      return res.status(200).send({ message });
     }
     catch(err){
       return res.status(500).send({message: 'Error occoured', Error: err.message})
