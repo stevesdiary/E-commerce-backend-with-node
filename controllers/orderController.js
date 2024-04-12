@@ -47,8 +47,7 @@ const orderController = {
       return res.status(200).send({ Message: 'Records found', Result: orders })
     }catch(err){
       console.log('An error occoured!', err);
-      res.status(500).send({message: 'Error happened', Error: err.message});
-      // return res.send({message: 'Error showed up', err});
+      return res.status(500).send({message: 'Error happened', Error: err.message});
     };
   },
 
@@ -61,7 +60,7 @@ const orderController = {
           exclude: ['createdAt', 'updatedAt', 'deletedAt']
         }
       });
-      console.log('Order found', order);
+      // console.log('Order found', order);
       return res.status(200).send({ Message: 'Order found', order });
     }catch(err){
       console.log('Error occoured', err)
@@ -71,16 +70,13 @@ const orderController = {
 
   deleteOrder: async (req, res ) => {
     try{
-      const id = req.params.id;
+      const order_id = req.params.order_id;
       console.log("IDDDD", id)
       const order = await Order.destroy({where: {id}})
-      // console.log(user)
-      if (order == 1 ){
-        return res.send({message: `Order with id ${id} has been deleted successfully!`})
-      }
-      if(order == 0){
-        return res.send({message: `Order ${id} does not exist or is deleted in the database`})
-      }
+      const message = order === 1
+      ? `Order with id ${order_id} has been deleted successfully!`
+      : `Order ${id} does not exist or is deleted in the database`
+        return res.status(200).send({ message })
     }catch(err){
       return res.status(500).send({message: 'Error occoured', err})
     }
@@ -97,7 +93,7 @@ const orderController = {
     }
   } catch (err) {
     console.log(err.message);
-    return res.status(500).send({ Message: 'Error occoured', Error: err.message })
+    return res.status(500).send({ Message: 'Error occoured', Error: err.message });
   }
   }
 }
