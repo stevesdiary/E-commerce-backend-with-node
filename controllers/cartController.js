@@ -46,12 +46,12 @@ const cartController = {
     }
     catch(err){
       console.log('An error occoured!', err);
-      return res.send({message: 'Error showed up', Error: err.message})
+      return res.status(500).send({message: 'Error showed up', Error: err.message})
     };
   },
   updateCart: async( req, res) => {
     try{
-      
+
     }
     catch(err){
       console.log('An error occoured!', err);
@@ -60,12 +60,18 @@ const cartController = {
   },
 
   findAllCarts: async (req,res) => {
-    const allCarts = await Cart.findAll({
+    try{
+      const allCarts = await Cart.findAll({
       attributes: {
         exclude: [ 'createdAt', 'updatedAt', 'deletedAt' ],
       }
     })
     return res.status(200).send({ Messsage: "Records found", Result: allCarts });
+    }
+    catch(err){
+      console.log('Error occoured', err)
+      res.status(500).send({ Message: 'Error happened', err});
+    };
   },
 
   deleteCart: async (req, res ) => {
