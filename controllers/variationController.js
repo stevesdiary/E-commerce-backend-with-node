@@ -9,10 +9,10 @@ const variationController = {
         }
       });
       // console.log('Records found', variations)
-      return res.status(200).send({ Message: 'Records found', Result: variations})
+      return res.status(200).send({ Message: 'Records found', Result: variations })
     }catch(err){
       console.log('An error occoured!', err);
-      return res.send({message: 'Error showed up', Error: err.message})
+      return res.send({ message: 'Error showed up', Error: err.message })
     };
   },
 
@@ -29,7 +29,7 @@ const variationController = {
       return res.status(200).send({message: 'Variation found', variation });
     }catch(err){
       console.log('Error occoured', err)
-      res.status(500).send({message: 'Error happened', Error: err.message});
+      res.status(500).send({ message: 'Error happened', Error: err.message});
     };
   },
 
@@ -42,7 +42,7 @@ const variationController = {
       : `User ${variation_id} does not exist or is deleted in the database`;
       return res.send({ message });
     }catch(err){
-      return res.status(500).send({message: 'Error occoured', Error: err.message})
+      return res.status(500).send({ message: 'Error occoured', Error: err.message })
     }
   },
 
