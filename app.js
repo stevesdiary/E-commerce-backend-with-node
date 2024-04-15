@@ -15,6 +15,7 @@ const logoutRoute = require('./routes/logout');
 const variationRoute = require('./routes/variation');
 const wishListRoute = require('./routes/wishList');
 const cartRoute = require('./routes/cart');
+const checkOutRoute = require('./routes/checkOut');
 
   console.log(emoji.emojify("I :heart: coding :man_technologist:!"))
   
@@ -30,6 +31,7 @@ app.use('/', logoutRoute);
 app.use('/', variationRoute);
 app.use('/', wishListRoute);
 app.use('/', cartRoute);
+app.use('/', checkOutRoute);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
