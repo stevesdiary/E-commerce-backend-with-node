@@ -152,19 +152,18 @@ const productController = {
 
   updateProduct: async (req, res) => {
   try{
-    const id = req.params.id;
-    const {name, address, email, phone_number, type } = req.body;
-    const updateProduct = await User.update({name, address, email, phone_number, type }, {where: {id}});
+    const product_id = req.params.product_id;
+    const {name, description, variation_id, category, price, discount, in_stock } = req.body;
+    const updateProduct = await Product.update({name, description, category, price, discount, in_stock }, {where: {product_id}});
     console.log(updateProduct);
-    if(updateProduct == 1) {
+    if(updateProduct === 1) {
       return res.status(200).send({ message: 'Record Updated' });
     }
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     return res.status(500).send({message: 'Error occoured', Error: err.message})
   }
-  }
-  
+  } 
 }
 
 module.exports = productController;
