@@ -8,7 +8,6 @@ const variationController = {
           exclude: ['createdAt', 'updatedAt', 'deletedAt']
         }
       });
-      // console.log('Records found', variations)
       return res.status(200).send({ Message: 'Records found', Result: variations })
     }catch(err){
       console.log('An error occoured!', err);
