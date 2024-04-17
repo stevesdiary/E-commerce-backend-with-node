@@ -22,6 +22,7 @@ const checkOutController = {
 
     const response = await flw.Charge.bank_transfer(payload)
     console.log(response);
+    return res.status(200).send({ Message: 'Payment successful', Result: response})
       // const checkOutCart = await Cart.create()
     }
     catch(err){
