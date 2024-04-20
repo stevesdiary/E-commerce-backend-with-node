@@ -10,6 +10,7 @@ const productController = {
     const product_id = uuidv4();
     const variation_id = uuidv4();
     const image_id = uuidv4();
+    // const media = await
     const productVariation = req.body.variations;
     const {name, category, description, price, discount, in_stock } = req.body;
     try{
