@@ -31,17 +31,18 @@ const cartController = {
           };
           variationsArray.push(newRecord);
           const cart = await Cart.bulkCreate([newRecord]);
+          let message;
+          if (cart) {
+            await Cart.update({size, colour, style, quantity }, { where: { cartOptions } });
+            message = 'Cart updated successfully';
+          } else {
+            await Cart.create({ cart_id, product_id, user_id, cartOptions });
+            message = 'Cart created successfully';
+          }
         }
-        
-        return res.status(200).send({ message: `Cart created successfully!`, Result: cart });
+        return res.status(200).send({ message: message, Result: cart });
       }
-      // if (existingCart) {
-      //   await Cart.update({ colour, quantity, style }, { where: { cartOptions } });
-      //   message = 'Cart updated successfully';
-      // } else {
-      //   await Cart.create({ cart_id, product_id, user_id, cartOptions });
-      //   message = 'Cart created successfully';
-      // }
+      
       
     }
     catch(err){
@@ -49,9 +50,9 @@ const cartController = {
       return res.status(500).send({message: 'Error showed up', Error: err.message})
     };
   },
-  updateCart: async( req, res) => {
+  updateStock: async( req, res) => {
     try{
-
+      const productUpdate = await Product.update()
     }
     catch(err){
       console.log('An error occoured!', err);
