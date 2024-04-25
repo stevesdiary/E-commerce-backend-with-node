@@ -1,23 +1,14 @@
-/**
- * @param {string}
- */
 const express = require("express");
-const { Sequelize } = require("sequelize");
 const cloudinary = require("cloudinary").v2;
-const mysql = require("mysql2");
-const env = require("dotenv").config();
 const fs = require("fs/promises");
 const cors = require("cors");
 const helmet = require("helmet");
 const db = require("./config/dbConfig");
 const app = express();
-const user_route = require("./routes/user");
 const path = require("path");
 const multer = require("multer");
 const bodyParser = require("body-parser");
-const port = process.env.LOCAL_PORT || 3000;
-require("dotenv").config();
-// const routes = require("./routes");
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -50,19 +41,33 @@ app.use("/", user_route);
 app.get("/", (req, res) => {
   res.send("Description.");
 });
-app.post(
-  "/upload",
-  upload.single("image", { folder: "hotels-ng" }),
+app.post("/upload", upload.single("image", { folder: "hotels-ng" }),
   async (req, res) => {
     try {
+      const product_id = '5678'
+      const image_id = '1234'
+      let items =req.body.file;
+      const imagesToUpload = images.map((image) => {
+        return (async () => {
+          const result = await cloudinary.uploader.upload(image);
+          return result;
+        })
+      });
+      
+      let uploads = await Promise.all(imagesToUpload);
+      console.log(uploads);
       let imagePath = "./uploads/" + req.file.filename;
 
-      // console.log('Upload status', imagePath)
-      const result = await cloudinary.uploader.upload(imagePath, options);
-      console.log(
-        "Upload successful! Here's the image url: ",
-        result.secure_url
-      );
+      const fileName = product_id + _ + image_id;
+      console.log('Image name', fileName)
+      const byteArrayBuffer = fs.readFileSync('shirt.jpg');
+      const uploadResult = await new Promise((resolve) => {
+        cloudinary.v2.uploader.upload_stream((error, uploadResult) => {
+          return resolve(uploadResult);
+        }).end(byteArrayBuffer);
+      });
+      console.log( "Upload successful! Here's the image url: ", result.secure_url );
+
       await fs.unlink("./uploads/" + req.file.filename, (err) => {
         if (err) {
           console.error(err);
