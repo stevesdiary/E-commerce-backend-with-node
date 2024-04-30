@@ -141,7 +141,7 @@ const productController = {
   deleteProduct: async (req, res ) => {
     try{
       const product_id = req.params.product_id;
-      const product = await Product.destroy({where: {product_id}});
+      const product = await Product.destroy({ where: {product_id} });
       const message = product === 1
       ? `Product with id ${product_id} has been deleted successfully!`
       : `Product with id ${product_id} does not exist or is deleted in the database`;
