@@ -1,0 +1,1221 @@
+{
+	"info": {
+		"_postman_id": "a166cf08-d73f-438b-8f3c-ff9023e8fcd8",
+		"name": "E-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users",
+					"id": "9d9bedd7-a866-4d63-af2f-8933d40010db",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3500/alluser"
+					},
+					"response": [
+						{
+							"id": "744ba6b4-29b6-4a4a-8a7b-128ff43fce9a",
+							"name": "http://localhost:3000/?city=London&units=metrics",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/?city=London&units=metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "city",
+											"value": "London"
+										},
+										{
+											"key": "units",
+											"value": "metrics"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "538"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-nWj3rOiSuXhAdJU6qhS+9YdYLY8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jan 2024 00:35:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Message\": \"Here is what the weather is in London\",\n    \"Weather\": {\n        \"coord\": {\n            \"lon\": -0.1257,\n            \"lat\": 51.5085\n        },\n        \"weather\": [\n            {\n                \"id\": 804,\n                \"main\": \"Clouds\",\n                \"description\": \"overcast clouds\",\n                \"icon\": \"04n\"\n            }\n        ],\n        \"base\": \"stations\",\n        \"main\": {\n            \"temp\": 276.93,\n            \"feels_like\": 275.03,\n            \"temp_min\": 275.95,\n            \"temp_max\": 277.59,\n            \"pressure\": 1029,\n            \"humidity\": 87\n        },\n        \"visibility\": 10000,\n        \"wind\": {\n            \"speed\": 2.06,\n            \"deg\": 280\n        },\n        \"clouds\": {\n            \"all\": 100\n        },\n        \"dt\": 1705105860,\n        \"sys\": {\n            \"type\": 2,\n            \"id\": 2075535,\n            \"country\": \"GB\",\n            \"sunrise\": 1705132885,\n            \"sunset\": 1705162562\n        },\n        \"timezone\": 0,\n        \"id\": 2643743,\n        \"name\": \"London\",\n        \"cod\": 200\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"id": "5b0ed99f-d866-4a70-a928-795cc20f214d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"rebecca.s@email.com\",\n    \"password\": \"ASw23gt@3$\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3300/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"id": "40de253a-8287-44d6-bc9c-3664239ab1b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3301/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"id": "1af41d11-2a04-408f-98d5-b525d7b0a722",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Shola\",\n    \"last_name\": \"Adejare\",\n    \"phone_number\": \"2349065976445\",\n    \"email\": \"adejareola@email.com\",\n    \"gender\": \"Female\",\n    \"billing_address\": \"17, Adamasingba road, Ijebu-Ode, Ogun State\",\n    \"shipping_address\": \"17, Adamasingba road, Ijebu-Ode, Ogun State\",\n    \"password\": \"123AdeJare$\",\n    \"confirm_password\": \"123AdeJare$\",\n    \"type\": \"regular\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3300/register"
+					},
+					"response": [
+						{
+							"id": "7e40d1f6-dda9-448c-9df6-5f0a44089f52",
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Rebecca\",\n    \"last_name\": \"Stevens\",\n    \"phone_number\": \"2349065976445\",\n    \"email\": \"rebecca.s@email.com\",\n    \"gender\": \"Female\",\n    \"password\": \"ASw23gt@3$\",\n    \"confirm_password\": \"ASw23gt@3$\",\n    \"type\": \"regular\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:2340/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "314"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13a-oare1zOSJMK1nCzDciKCthcKBN4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Feb 2024 12:54:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Message\": \"User Rebecca created successfully\",\n    \"User\": {\n        \"id\": \"ea89708f-6015-4d89-a930-4e50ff734f91\",\n        \"first_name\": \"Rebecca\",\n        \"last_name\": \"Stevens\",\n        \"gender\": \"Female\",\n        \"email\": \"rebecca.s@email.com\",\n        \"phone_number\": 2147483647,\n        \"createdAt\": \"2024-02-15T12:54:37.000Z\",\n        \"updatedAt\": \"2024-02-15T12:54:37.000Z\",\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				}
+			],
+			"id": "1092fffe-1435-4834-8b0b-876e92cd37d0"
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All products",
+					"id": "da225509-acc0-4327-99fa-6288dcc03b2e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Lofers",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "55f6841c-59a3-47ff-a1f3-5d22db5b83af",
+							"name": "http://localhost:3000/?city=London&units=metrics",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/?city=London&units=metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "city",
+											"value": "London"
+										},
+										{
+											"key": "units",
+											"value": "metrics"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "538"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-nWj3rOiSuXhAdJU6qhS+9YdYLY8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jan 2024 00:35:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Message\": \"Here is what the weather is in London\",\n    \"Weather\": {\n        \"coord\": {\n            \"lon\": -0.1257,\n            \"lat\": 51.5085\n        },\n        \"weather\": [\n            {\n                \"id\": 804,\n                \"main\": \"Clouds\",\n                \"description\": \"overcast clouds\",\n                \"icon\": \"04n\"\n            }\n        ],\n        \"base\": \"stations\",\n        \"main\": {\n            \"temp\": 276.93,\n            \"feels_like\": 275.03,\n            \"temp_min\": 275.95,\n            \"temp_max\": 277.59,\n            \"pressure\": 1029,\n            \"humidity\": 87\n        },\n        \"visibility\": 10000,\n        \"wind\": {\n            \"speed\": 2.06,\n            \"deg\": 280\n        },\n        \"clouds\": {\n            \"all\": 100\n        },\n        \"dt\": 1705105860,\n        \"sys\": {\n            \"type\": 2,\n            \"id\": 2075535,\n            \"country\": \"GB\",\n            \"sunrise\": 1705132885,\n            \"sunset\": 1705162562\n        },\n        \"timezone\": 0,\n        \"id\": 2643743,\n        \"name\": \"London\",\n        \"cod\": 200\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product by ID",
+					"id": "33560f27-65ca-498b-9647-5b212e75875c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3300/product/9f1d0d5f-2cb8-4732-a2ef-d1b914307102"
+					},
+					"response": [
+						{
+							"id": "ae7e8f73-50d8-4fc1-a167-9de715076818",
+							"name": "http://localhost:3000/?city=London&units=metrics",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/?city=London&units=metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "city",
+											"value": "London"
+										},
+										{
+											"key": "units",
+											"value": "metrics"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "538"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-nWj3rOiSuXhAdJU6qhS+9YdYLY8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jan 2024 00:35:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Message\": \"Here is what the weather is in London\",\n    \"Weather\": {\n        \"coord\": {\n            \"lon\": -0.1257,\n            \"lat\": 51.5085\n        },\n        \"weather\": [\n            {\n                \"id\": 804,\n                \"main\": \"Clouds\",\n                \"description\": \"overcast clouds\",\n                \"icon\": \"04n\"\n            }\n        ],\n        \"base\": \"stations\",\n        \"main\": {\n            \"temp\": 276.93,\n            \"feels_like\": 275.03,\n            \"temp_min\": 275.95,\n            \"temp_max\": 277.59,\n            \"pressure\": 1029,\n            \"humidity\": 87\n        },\n        \"visibility\": 10000,\n        \"wind\": {\n            \"speed\": 2.06,\n            \"deg\": 280\n        },\n        \"clouds\": {\n            \"all\": 100\n        },\n        \"dt\": 1705105860,\n        \"sys\": {\n            \"type\": 2,\n            \"id\": 2075535,\n            \"country\": \"GB\",\n            \"sunrise\": 1705132885,\n            \"sunset\": 1705162562\n        },\n        \"timezone\": 0,\n        \"id\": 2643743,\n        \"name\": \"London\",\n        \"cod\": 200\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create product",
+					"id": "8c99e0aa-ec1c-4510-b990-e70ba908e3b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Chelsea Jersy 2023\",\n    \"category\": \"Wears\",\n    \"description\": \"New custom made chelsea Jersys\",\n    \"price\": 50000,\n    \"discount\": 0,\n    \"in_stock\": true,\n    \"variations\": [\n        {\"size\": 23, \"colour\": \"Blue\", \"style\": \"Long sleeve\", \"quantity\": 40},\n        {\"size\": 33, \"colour\": \"black\", \"style\": \"Round neck\", \"quantity\": 20},\n        {\"size\": 42, \"colour\": \"White\", \"style\": \"Polo\", \"quantity\": 30}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3300/createproduct"
+					},
+					"response": []
+				},
+				{
+					"name": "Search product",
+					"id": "47bb43eb-e04b-41ea-8a80-1d8cb2eca443",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/product/?size=43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "footwears",
+									"disabled": true
+								},
+								{
+									"key": "colour",
+									"value": "brown",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "style",
+									"value": "Polo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "43",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by size",
+					"id": "e912af05-c710-4575-b826-6b38047a9fb1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/variations/?size=42",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"variations",
+								""
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "42"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by size Copy",
+					"id": "077d60f9-ea10-4349-812a-3a83828c65f7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/product/?size=42",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "42"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "46c42647-62a6-4272-99c5-bb97cf84715b"
+		},
+		{
+			"name": "Variation",
+			"item": [
+				{
+					"name": "Get All variations",
+					"id": "e0862dd5-59c1-4217-8f72-4986f8f1db62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3300/"
+					},
+					"response": []
+				}
+			],
+			"id": "5b5013ed-709c-4013-9cb1-82d1306527b5"
+		},
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "Create wishlist",
+					"id": "35aa1925-bb3e-4124-8df9-e8de4e065da8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"a4ad3958-7125-4efd-8a2d-299f08e29b3a\",\n    \"product_id\": \"38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/wish/?product_id=38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0&user_id=a4ad3958-7125-4efd-8a2d-299f08e29b3a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"wish",
+								""
+							],
+							"query": [
+								{
+									"key": "product_id",
+									"value": "38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0"
+								},
+								{
+									"key": "user_id",
+									"value": "a4ad3958-7125-4efd-8a2d-299f08e29b3a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wishes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "147c435b-a09e-4d48-ae57-871df53144d5",
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Rows array is present and contains the expected number of elements\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property(\"Result\");",
+									"    pm.expect(responseData.Result).to.have.property(\"rows\");",
+									"    pm.expect(responseData.Result.rows).to.be.an('array');",
+									"    pm.expect(responseData.Result.rows).to.have.lengthOf(1);",
+									"});",
+									"",
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Wish ID</th>",
+									"        <th>Product ID</th>",
+									"        <th>User ID</th>",
+									"        <th>User First Name</th>",
+									"        <th>User Last Name</th>",
+									"        <th>User Gender</th>",
+									"        <th>User Email</th>",
+									"        <th>User Phone Number</th>",
+									"        <th>User Billing Address</th>",
+									"        <th>Product Name</th>",
+									"        <th>Product Category</th>",
+									"        <th>Product Description</th>",
+									"        <th>Product Price</th>",
+									"        <th>Product Discount</th>",
+									"        <th>Product In Stock</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.Result.rows}}",
+									"        <tr>",
+									"            <td>{{wish_id}}</td>",
+									"            <td>{{product_id}}</td>",
+									"            <td>{{user_id}}</td>",
+									"            <td>{{User.first_name}}</td>",
+									"            <td>{{User.last_name}}</td>",
+									"            <td>{{User.gender}}</td>",
+									"            <td>{{User.email}}</td>",
+									"            <td>{{User.phone_number}}</td>",
+									"            <td>{{User.billing_address}}</td>",
+									"            <td>{{Product.name}}</td>",
+									"            <td>{{Product.category}}</td>",
+									"            <td>{{Product.description}}</td>",
+									"            <td>{{Product.price}}</td>",
+									"            <td>{{Product.discount}}</td>",
+									"            <td>{{Product.in_stock}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "db1f09e0-4285-477f-a0cf-0ea40d187466",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3300/wishlists",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve wishlists. The response will be in JSON format with a status code of 200. The response will include a message and a Result object containing the count and an array of wishlist items. Each wishlist item will have wish_id, product_id, user_id, User object with user details, and Product object with product details such as product_id, variation_id, image_id, name, category, description, price, discount, and in_stock status.\n"
+					},
+					"response": [
+						{
+							"id": "80b46465-999b-421a-8c0b-15460b171204",
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:3300/wishlists"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "779"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30b-XLPWdLdFSL2qC5jABJjevI9B8a0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 10:12:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Records found\",\n    \"Result\": {\n        \"count\": 1,\n        \"rows\": [\n            {\n                \"wish_id\": \"69024833-4521-4b94-8167-4d51645f9274\",\n                \"product_id\": \"38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0\",\n                \"user_id\": \"a4ad3958-7125-4efd-8a2d-299f08e29b3a\",\n                \"User\": {\n                    \"user_id\": \"a4ad3958-7125-4efd-8a2d-299f08e29b3a\",\n                    \"first_name\": \"Shola\",\n                    \"last_name\": \"Adejare\",\n                    \"gender\": \"Female\",\n                    \"email\": \"adejareola@email.com\",\n                    \"phone_number\": 2147483647,\n                    \"billing_address\": \"17, Adamasingba road, Ijebu-Ode, Ogun State\",\n                    \"shipping_address\": null,\n                    \"type\": \"regular\"\n                },\n                \"Product\": {\n                    \"product_id\": \"38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0\",\n                    \"variation_id\": \"d3be8d35-d095-4cc9-ba62-a4fce99e2d32\",\n                    \"image_id\": \"d4da775c-33df-4412-9454-b8a3c55bd52e\",\n                    \"name\": \"Lofers\",\n                    \"category\": \"Footwears\",\n                    \"description\": \"New custom-made Lofers\",\n                    \"price\": 40000,\n                    \"discount\": 0,\n                    \"in_stock\": true\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete wish",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aeaa3eb5-7bf8-488b-bd5d-265568ddebde",
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message field is present in the response\", function () {",
+									"  const responseData = pm.response.json();",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.message).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message field is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify wishlist item is deleted\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "9023cee9-c51b-4947-9ecc-9da401d4486a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3300/wishlist/69024833-4521-4b94-8167-4d51645f9274"
+					},
+					"response": []
+				}
+			],
+			"id": "e92fde4b-b295-4620-8e6e-e8fd4894ebcf"
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"id": "a9f28dcd-664d-4d02-a3d9-eb8d37350368",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/order/?user_id=a4ad3958-7125-4efd-8a2d-299f08e29b3a&product_id=38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0&quantity=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"order",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "a4ad3958-7125-4efd-8a2d-299f08e29b3a",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "147c435b-a09e-4d48-ae57-871df53144d5",
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Rows array is present and contains the expected number of elements\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property(\"Result\");",
+									"    pm.expect(responseData.Result).to.have.property(\"rows\");",
+									"    pm.expect(responseData.Result.rows).to.be.an('array');",
+									"    pm.expect(responseData.Result.rows).to.have.lengthOf(1);",
+									"});",
+									"",
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Wish ID</th>",
+									"        <th>Product ID</th>",
+									"        <th>User ID</th>",
+									"        <th>User First Name</th>",
+									"        <th>User Last Name</th>",
+									"        <th>User Gender</th>",
+									"        <th>User Email</th>",
+									"        <th>User Phone Number</th>",
+									"        <th>User Billing Address</th>",
+									"        <th>Product Name</th>",
+									"        <th>Product Category</th>",
+									"        <th>Product Description</th>",
+									"        <th>Product Price</th>",
+									"        <th>Product Discount</th>",
+									"        <th>Product In Stock</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.Result.rows}}",
+									"        <tr>",
+									"            <td>{{wish_id}}</td>",
+									"            <td>{{product_id}}</td>",
+									"            <td>{{user_id}}</td>",
+									"            <td>{{User.first_name}}</td>",
+									"            <td>{{User.last_name}}</td>",
+									"            <td>{{User.gender}}</td>",
+									"            <td>{{User.email}}</td>",
+									"            <td>{{User.phone_number}}</td>",
+									"            <td>{{User.billing_address}}</td>",
+									"            <td>{{Product.name}}</td>",
+									"            <td>{{Product.category}}</td>",
+									"            <td>{{Product.description}}</td>",
+									"            <td>{{Product.price}}</td>",
+									"            <td>{{Product.discount}}</td>",
+									"            <td>{{Product.in_stock}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "9ca99ba7-0860-43bb-81fb-e4f64f1379d4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3300/allorders",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve wishlists. The response will be in JSON format with a status code of 200. The response will include a message and a Result object containing the count and an array of wishlist items. Each wishlist item will have wish_id, product_id, user_id, User object with user details, and Product object with product details such as product_id, variation_id, image_id, name, category, description, price, discount, and in_stock status.\n"
+					},
+					"response": [
+						{
+							"id": "cf65b8f1-0b7b-4b94-83b9-180cf3b37159",
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:3300/wishlists"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "779"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30b-XLPWdLdFSL2qC5jABJjevI9B8a0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 10:12:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Records found\",\n    \"Result\": {\n        \"count\": 1,\n        \"rows\": [\n            {\n                \"wish_id\": \"69024833-4521-4b94-8167-4d51645f9274\",\n                \"product_id\": \"38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0\",\n                \"user_id\": \"a4ad3958-7125-4efd-8a2d-299f08e29b3a\",\n                \"User\": {\n                    \"user_id\": \"a4ad3958-7125-4efd-8a2d-299f08e29b3a\",\n                    \"first_name\": \"Shola\",\n                    \"last_name\": \"Adejare\",\n                    \"gender\": \"Female\",\n                    \"email\": \"adejareola@email.com\",\n                    \"phone_number\": 2147483647,\n                    \"billing_address\": \"17, Adamasingba road, Ijebu-Ode, Ogun State\",\n                    \"shipping_address\": null,\n                    \"type\": \"regular\"\n                },\n                \"Product\": {\n                    \"product_id\": \"38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0\",\n                    \"variation_id\": \"d3be8d35-d095-4cc9-ba62-a4fce99e2d32\",\n                    \"image_id\": \"d4da775c-33df-4412-9454-b8a3c55bd52e\",\n                    \"name\": \"Lofers\",\n                    \"category\": \"Footwears\",\n                    \"description\": \"New custom-made Lofers\",\n                    \"price\": 40000,\n                    \"discount\": 0,\n                    \"in_stock\": true\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			],
+			"id": "d74cc5c9-f8d7-483d-8b68-58b33da8aba8"
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Create cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6dd0da05-1deb-4e19-a455-cfd143d3edde",
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required content type - application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message field is present in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"User_id and product_id are correctly parsed and processed in the request URL\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist;",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "06a09cd2-7a3c-4fa8-9065-a53b8dc5daca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cartOptions\": [\n        {\"size\": 23, \"colour\": \"Blue\", \"style\": \"Long sleeve\", \"quantity\": 40},\n        {\"size\": 33, \"colour\": \"black\", \"style\": \"Round neck\", \"quantity\": 20}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/cart/?user_id=a4ad3958-7125-4efd-8a2d-299f08e29b3a&product_id=38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"cart",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "a4ad3958-7125-4efd-8a2d-299f08e29b3a"
+								},
+								{
+									"key": "product_id",
+									"value": "38d2856a-ceb5-4cca-a7ca-d72fd1f49ae0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get carts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb36b2e1-000d-431c-978d-215b31b0bd84",
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Quantity is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    ",
+									"    responseData.Result.forEach(function(cartItem) {",
+									"        pm.expect(cartItem.quantity).to.be.a('number');",
+									"        pm.expect(cartItem.quantity).to.be.at.least(0);",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify the presence of the 'Result' array and it contains at least one element\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('array').that.is.not.empty;",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "9b9c431b-546a-4f5c-a09b-db708e8a6289",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3300/allcarts"
+					},
+					"response": []
+				}
+			],
+			"id": "0c6c3c45-d070-4bde-b5ae-2dba12aba72f"
+		},
+		{
+			"name": "Image upload",
+			"id": "f7c60254-bbf0-4aff-8ef8-99090ff4ad7b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3300/uploadbulk"
+			},
+			"response": []
+		}
+	]
+}
