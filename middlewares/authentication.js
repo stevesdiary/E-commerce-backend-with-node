@@ -6,7 +6,7 @@ const authentication = async (req, res, next) => {
   const authHeader = req.headers['Authorization'];
   let token = req.headers.authorization
   if (!token) {
-      return res.send("Provide correct token first!")
+    return res.send("Provide correct token first!")
   }
   token = authHeader && authHeader.split(' ')[1];
   if(token == null || token !== token){ 
@@ -14,7 +14,7 @@ const authentication = async (req, res, next) => {
   }
   try{
     const decoded = jwt.verify(token, secret, (err, user));
-    console.log("DECODED USER DATA ", decoded);
+    // console.log("DECODED USER DATA ", decoded);
     if(decoded.UserInfo){
       req.email = decoded.UserInfo.email;
       req.type = decoded.UserInfo.type;
