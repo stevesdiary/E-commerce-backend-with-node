@@ -19,7 +19,7 @@
     "node-emoji": "^2.2.0",
     "nodemon": "^3.1.10",
     "p-limit": "^7.2.0",
-    "sequelize": "^6.37.7",
+    "sequelize": "^6.37.8",
     "uuid": "^13.0.0"
   },
   "name": "ecommerce-server-side",
